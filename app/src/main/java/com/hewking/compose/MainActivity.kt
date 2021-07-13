@@ -3,13 +3,54 @@ package com.hewking.compose
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Text(text = "Hello World!")
+            NewStory()
         }
     }
+}
+
+@Composable
+fun NewStory(){
+    Column(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Image(painter = painterResource(id = R.drawable.header)
+            , modifier = Modifier
+                .height(180.dp)
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp))
+            , contentScale = ContentScale.Crop
+            , contentDescription = null)
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = "Hello World!, 这是第一个示例，展示Compose 的魅力",
+            style = typography.h6,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 2)
+        Text(text = "遇上她", style = typography.body2)
+        Text(text = "了解她", style = typography.body2)
+        Text(text = "互相有兴趣，互相了解", style = typography.body2)
+    }
+}
+
+@Preview
+@Composable
+fun previewNewStory(){
+    NewStory()
 }
